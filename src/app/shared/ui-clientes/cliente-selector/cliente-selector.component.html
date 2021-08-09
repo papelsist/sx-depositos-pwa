@@ -1,0 +1,49 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title> Catálogo de clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list-header>
+    <ion-searchbar
+      #search
+      showCancelButton="focus"
+      animated
+      placeholder="Buscar por nombre/clave/rfc"
+      color="tertiary"
+      (ionChange)="onSearch($event)"
+      (ionCancel)="close()"
+      (keyup.enter)="onSearAll(search.value)"
+      (keyup.arrowdown)="firstItem($event)"
+    ></ion-searchbar>
+  </ion-list-header>
+  <ion-list lines="full" #list>
+    <ion-item
+      *ngFor="let c of clientes$ | async; index as idx; first as fst"
+      (click)="select(c)"
+      button
+      [tabindex]="fst ? -1 : 0"
+      (keyup.arrowdown)="nextItem(idx, $event)"
+      (keyup.arrowup)="previousItem(idx, $event)"
+    >
+      <ion-label class="ion-text-wrap">
+        <ion-text>
+          {{ c.nombre }}
+        </ion-text>
+        <ion-text color="secondary">
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col>
+                <h4>RFC: {{ c.rfc }}</h4>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-text>
+      </ion-label>
+
+      <ion-note slot="end" color="warning">
+        {{ c.credito ? 'Crédito' : c['tipo'] ? c['tipo'] : '' }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

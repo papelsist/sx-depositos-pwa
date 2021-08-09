@@ -1,0 +1,53 @@
+<ion-list class="ion-no-padding">
+  <ion-item-sliding *ngFor="let sol of solicitudes">
+    <ion-item-options side="end">
+      <ion-item-option (click)="onEdit($event, sol)">
+        <ion-icon name="create" slot="start"></ion-icon>
+        <ion-label>Cambiar cliente</ion-label>
+      </ion-item-option>
+    </ion-item-options>
+    <ion-item button [routerLink]="sol.id">
+      <ion-chip slot="start">
+        {{ sol.folio }}
+      </ion-chip>
+      <ion-label>
+        <div class="row">
+          <span>
+            {{ sol.total | currency }}
+            <ion-text color="success">
+              <small>
+                ({{
+                  sol.transferencia > 0
+                    ? 'TRS'
+                    : sol.cheque > 0
+                    ? 'CHEQUE'
+                    : 'EFECTIVO'
+                }})
+              </small>
+            </ion-text>
+          </span>
+          <span>{{ sol.banco.nombre }}</span>
+          <span>{{ sol.cuenta.descripcion }} ({{ sol.cuenta.numero }})</span>
+          <span
+            >Fecha depósito: {{ sol.fechaDeposito | date: 'dd/MM/yyyy' }}</span
+          >
+        </div>
+        <p class="row">
+          <span *ngIf="sol.autorizacion">
+            Autorizó: {{ sol.autorizacion.createUser }} ({{
+              sol.autorizacion.fecha.toDate() | date: 'dd/MM/yyyy HH:mm'
+            }})
+          </span>
+          <span> Referencia: {{ sol.referencia }} </span>
+        </p>
+        <p>
+          {{ sol.cliente.nombre }}
+        </p>
+      </ion-label>
+
+      <ion-chip slot="end" color="warning">
+        {{ sol.sucursal }}
+      </ion-chip>
+    </ion-item>
+  </ion-item-sliding>
+</ion-list>

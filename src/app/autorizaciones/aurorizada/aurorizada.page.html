@@ -1,0 +1,19 @@
+<ion-header *ngIf="solicitud$ | async as sol">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/autorizaciones/autorizadas"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{getTitle(sol)}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="solicitud$ | async as solicitud">
+  <papx-solicitud-panel [solicitud]="solicitud"></papx-solicitud-panel>
+  <ion-label color="success" class="ion-padding-start">Autorización</ion-label>
+
+  <papx-autorizacion-panel
+    [autorizacion]="solicitud.autorizacion"
+  ></papx-autorizacion-panel>
+</ion-content>

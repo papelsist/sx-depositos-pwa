@@ -1,0 +1,69 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+.create-solicitud-custom-alert {
+  --min-width: 70%;
+}
+// .solicitud-detail-modal {
+//   --width: 60%;
+// }
+.banco-field-popup {
+  --min-width: 70%;
+  // --width
+}
+.cuenta-de-banco-field-popup {
+  --min-width: 70%;
+  // --width
+}
+
+ion-popover.solicitud-rechazo-popover {
+  --width: 400px;
+  --max-width: 100%;
+  box-shadow: -8px 0 16px rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+}
+
+ion-popover.solicitud-autorizar-popover {
+  --width: 450px;
+  --max-width: 100%;
+  box-shadow: -8px 0 16px rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+}
+
+.solicitudes-filter-modal {
+  --max-width: 450px;
+  --max-height: 300px;
+}
+.periodo-selector-modal {
+  --max-width: 450px;
+  --height: 300px;
+}
+
+.cambio-de-cliente-modal {
+  --min-width: 600px;
+  --max-height: 400px;
+}

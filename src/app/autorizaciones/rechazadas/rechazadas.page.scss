@@ -1,0 +1,11 @@
+.solicitud {
+  font-size: 0.9rem;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+.row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}

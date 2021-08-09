@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Rechazadas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list class="ion-no-padding">
+    <ion-item
+      *ngFor="let sol of rechazadas$ | async"
+      button
+      [routerLink]="sol.id"
+    >
+      <ion-label class="ion-text-wrap">
+        <div class="solicitud">
+          <span>
+            {{ sol.total | currency }}
+            <ion-text color="success">
+              <small> ({{ sol.transferencia > 0 ? 'TRS' : 'DEP' }}) </small>
+            </ion-text>
+          </span>
+          <span>{{ sol.banco.nombre }}</span>
+          <span>{{ sol.cuenta.descripcion }} ({{ sol.cuenta.numero }})</span>
+          <span>Fecha: {{ sol.fechaDeposito | date: 'dd/MM/yyyy' }}</span>
+          <ng-container *ngIf="sol.rechazo">
+            <span>
+              <ion-text color="warning"> {{sol?.rechazo?.motivo}} </ion-text>
+            </span>
+            <span>
+              {{sol.rechazo.dateCreated.toDate() | date: 'dd/MM/yyyy HH:mm'}}
+            </span>
+            <span> {{sol.rechazo.userName}} </span>
+          </ng-container>
+        </div>
+
+        <!-- <p class="row">
+          <span>
+            Rechazo:
+            <ion-text color="warning"> {{sol.rechazo.motivo}} </ion-text>
+          </span>
+          <span>
+            <ion-text color="warning" *ngIf="sol.rechazo.comentario">
+              ({{sol.rechazo.comentario}} )
+            </ion-text>
+          </span>
+          <span>
+            {{sol.rechazo.dateCreated.toDate() | date: 'dd/MM/yyyy HH:mm'}}
+          </span>
+          
+        </p> -->
+      </ion-label>
+      <ion-chip slot="start"> {{ sol.folio }} </ion-chip>
+      <ion-chip slot="end" color="warning"> {{ sol.sucursal }} </ion-chip>
+    </ion-item>
+  </ion-list>
+</ion-content>

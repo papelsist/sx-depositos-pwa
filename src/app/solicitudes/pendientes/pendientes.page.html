@@ -1,0 +1,53 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title
+        >{{vm.filtrar ? 'Mis solicitudes': 'Solicitudes de: ' +
+        vm.sucursal}}</ion-title
+      >
+      <ion-buttons slot="end">
+        <ion-button (click)="changeView('cards')" *ngIf="view !== 'cards'">
+          <ion-icon name="grid" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button (click)="changeView('list')" *ngIf="view !== 'list'">
+          <ion-icon name="list" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button
+          (click)="filtrar(vm.filtrar)"
+          [color]="vm.filtrar ? 'primary': ''"
+        >
+          <ion-icon name="filter" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button (click)="registrarNotificaciones(vm.user, vm.token)">
+          <ion-icon
+            [name]="vm.token ? 'notifications': 'notifications-off'"
+            slot="icon-only"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-no-padding">
+    <papx-solicitudes-cards-view
+      [solicitudes]="vm.pendientes "
+      *ngIf="view === 'cards'"
+    ></papx-solicitudes-cards-view>
+    <papx-solicitudes-list-view
+      [delegateDrilldown]="true"
+      [solicitudes]="vm.pendientes "
+      (selection)="onSelection($event)"
+      *ngIf="view === 'list'"
+    >
+    </papx-solicitudes-list-view>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button [routerLink]="['/solicitudes','create']">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+</ng-container>

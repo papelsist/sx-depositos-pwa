@@ -1,0 +1,37 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/solicitudes"></ion-back-button>
+      </ion-buttons>
+      <ion-title
+        >Solicitud de depósito
+        <span class="sucursal">({{vm.sucursal}})</span>
+      </ion-title>
+      <ion-buttons slot="end">
+        <papx-cartera-selector
+          [(cartera)]="cartera"
+          *ngIf="modificarCartera"
+        ></papx-cartera-selector>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <papx-solicitud-create-form
+      [tipo]="cartera"
+      [sucursal]="vm.sucursal"
+      [solcita]="vm.user.nombre"
+      [pedido]="pedido"
+      (save)="onSave($event, vm.user)"
+      (cancelar)="onCancelar()"
+      (valueReady)="validarDuplicado($event)"
+      (lookupPedido)="onLookupPedido($event, vm.sucursal)"
+    ></papx-solicitud-create-form>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title size="small" slot="end"> {{vm.user.displayName}} </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ng-container>

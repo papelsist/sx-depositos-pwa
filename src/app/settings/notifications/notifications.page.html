@@ -1,0 +1,63 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/settings"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Notificaciones</ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon
+            slot="icon-only"
+            [name]="vm.token ? 'notifications': 'notifications-off'"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-list-header>
+        <ion-label [color]="!vm.token ? 'warning': 'primary'">
+          {{vm.token ? 'Subscripciones disponibles': 'Dispositivo no autorizado'
+          }}
+        </ion-label>
+        <ion-button
+          color="primary"
+          (click)="autorizar(vm.user)"
+          *ngIf="!vm.token"
+        >
+          Autorizar
+        </ion-button>
+        <!-- <ion-button
+          color="warning"
+          *ngIf="vm.token"
+          (click)="cancelar(vm.token, vm.user)"
+          >Cancelar</ion-button
+        > -->
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Pendientes</ion-label>
+        <ion-toggle
+          [disabled]="!vm.token"
+          (ionChange)="tooglePendientes(vm.token, $event)"
+        ></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Autorizadas</ion-label>
+        <ion-toggle [disabled]="!vm.token"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Rechazadas</ion-label>
+        <ion-toggle [disabled]="!vm.token"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="vm.token">
+        <ion-label>
+          <h3>Token:</h3>
+          <p>{{vm.token}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ng-container>

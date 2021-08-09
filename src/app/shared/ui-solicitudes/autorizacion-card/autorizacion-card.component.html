@@ -1,0 +1,122 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle class="ion-text-wrap">{{
+      solicitud.cliente.nombre
+    }}</ion-card-subtitle>
+    <ion-card-title class="ion-text-center" color="success"
+      >{{ solicitud.total | currency }}
+      <ion-text color="warning" *ngIf="solicitud.sbc">(SBC)</ion-text>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngIf="solicitud.transferencia > 0.0">
+        <ion-label position="floating">Transferencia:</ion-label>
+        <ion-input
+          color="primary"
+          value="{{ solicitud.transferencia | currency }}"
+          readonly
+        ></ion-input>
+        <ion-icon name="send" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item *ngIf="solicitud.efectivo > 0.0">
+        <ion-label position="floating"> Efectivo: </ion-label>
+        <ion-input
+          color="primary"
+          value="{{ solicitud.efectivo | currency }}"
+          readonly
+        >
+        </ion-input>
+        <ion-icon name="cash" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item *ngIf="solicitud.cheque > 0.0">
+        <ion-label position="floating"> Cheque: </ion-label>
+        <ion-input
+          color="primary"
+          value="{{ solicitud.cheque | currency }}"
+          readonly
+        >
+        </ion-input>
+        <ion-icon name="wallet" slot="start"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating"> Banco origen: </ion-label>
+        <ion-input color="primary" value="{{ solicitud.banco.nombre }}">
+        </ion-input>
+        <ion-icon size="small" slot="start" name="business"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cuenta destino:</ion-label>
+        <ion-input
+          color="warning"
+          readonly
+          value="{{ solicitud.cuenta.descripcion }} ({{
+            solicitud.cuenta.numero
+          }})"
+        ></ion-input>
+        <ion-icon slot="start" name="folder"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating"> Fecha Depósito: </ion-label>
+        <ion-input
+          color="warning"
+          value="{{ solicitud.fechaDeposito | date: 'dd/MM/yyyy' }}"
+        >
+        </ion-input>
+        <ion-icon slot="start" name="calendar"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Referencia: </ion-label>
+        <ion-input color="warning" value="{{ solicitud.referencia }}">
+        </ion-input>
+        <ion-icon slot="start" name="information-circle"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating"> Solicito: </ion-label>
+        <ion-input
+          value="{{ solicitud.solicita ? solicitud.solicita : 'ND' }}"
+          readonly
+        >
+        </ion-input>
+        <ion-icon slot="start" name="person"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating"> Fecha: </ion-label>
+        <ion-input
+          value="{{ solicitud.fecha | date: 'dd/MM/yyy HH:mm' }}"
+          readonly
+        >
+        </ion-input>
+        <ion-icon slot="start" name="calendar-number"></ion-icon>
+        <ion-note slot="end" [color]="retrasoColor">
+          {{ retraso }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating"> Sucursal: </ion-label>
+        <ion-input
+          value="{{ solicitud.sucursal ? solicitud.sucursal : 'ND' }}"
+          readonly
+        >
+        </ion-input>
+        <ion-icon slot="start" name="storefront"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="!solicitud.autorizacion">
+      <ion-button color="success" (click)="autorizar.emit(solicitud)">
+        <ion-icon name="checkmark-done" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="rechazar.emit(solicitud)">
+        <ion-icon name="arrow-undo" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="solicitud.autorizacion" color="success">
+      AUTORIZADA
+    </ion-title>
+  </ion-toolbar>
+</ion-card>

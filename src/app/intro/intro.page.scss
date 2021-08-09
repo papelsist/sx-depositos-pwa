@@ -1,0 +1,50 @@
+ion-slides {
+  height: 80%;
+}
+.swiper-slide {
+  display: block;
+}
+.swiper-slide h2 {
+  margin-top: 1rem;
+}
+.swiper-slide img {
+  max-height: 70%;
+  max-width: 90%;
+  margin: 0px 0 0px;
+  pointer-events: none;
+}
+b {
+  font-weight: 500;
+}
+
+p {
+  padding: 0 10px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ion-color-step-600, #60646b);
+}
+
+p b {
+  color: var(--ion-text-color, #000000);
+}
+.tablero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .mostrar-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 14px;
+      line-height: 16px;
+      color: #8c8c8c;
+      margin: 0;
+    }
+  }
+}
+ion-checkbox {
+  --size: 14px;
+}

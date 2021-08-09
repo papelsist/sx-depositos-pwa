@@ -1,0 +1,53 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@papx/utils": [
+        "./src/app/utils/index.ts"
+      ],
+      "@papx/models": [
+        "./src/app/@models/index.ts"
+      ],
+      "@papx/data-access": [
+        "./src/app/@data-access/index.ts"
+      ],
+      "@papx/data-access/bancos": [
+        "./src/app/@data-access-bancos/index.ts"
+      ],
+      "@papx/shared/*": [
+        "./src/app/shared/*"
+      ],
+      "@papx/shared/ui-bancos": [
+        "./src/app/shared/ui-bancos/index.ts"
+      ],
+      "@papx/shared/ui-clientes": [
+        "./src/app/shared/ui-clientes/index.ts"
+      ],
+      "@papx/shared/ui-solicitudes": [
+        "./src/app/shared/ui-solicitudes/index.ts"
+      ],
+      "@papx/auth": [
+        "./src/app/@auth/index.ts"
+      ],
+
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

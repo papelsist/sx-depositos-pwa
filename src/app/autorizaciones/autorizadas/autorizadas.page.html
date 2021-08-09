@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Autorizadas</ion-title>
+    <ion-buttons slot="end">
+      <papx-solicitudes-filter
+        [filter]="filter$ | async"
+        (search)="onSearch($event)"
+      ></papx-solicitudes-filter>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-toolbar>
+    <ion-searchbar
+      #search
+      placeholder="Buscar"
+      (ionChange)="onFilter($event)"
+      (keyup.enter)="buscarPorFolio(search.value)"
+    ></ion-searchbar>
+  </ion-toolbar>
+  <papx-solicitudes-autorizadas-list
+    [solicitudes]="filteredList$ | async"
+    (edit)="onEdit($event)"
+  ></papx-solicitudes-autorizadas-list>
+</ion-content>

@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Depósitos APP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item-divider color="medium" color="warning">
+    <ion-label> Mi cuenta </ion-label>
+    <ion-icon name="settings" slot="start"></ion-icon>
+  </ion-item-divider>
+
+  <ion-list>
+    <ion-item routerLink="account">
+      <ion-label> Inicio de sesión y seguridad </ion-label>
+      <ion-icon name="key" slot="start"></ion-icon>
+    </ion-item>
+    <ng-container *ngIf="vm$ | async as vm">
+      <ion-item-sliding *ngIf="vm.canAutorizar">
+        <ion-item>
+          <ion-label>
+            <h2>Notificaciones pendientes</h2>
+            <p>
+              Recibir notificaciones push de solicitudes pendientes de autorizar
+            </p>
+          </ion-label>
+          <ion-icon
+            [name]="vm.token ? 'notifications' : 'notifications-off' "
+            slot="start"
+            [color]="vm.token ? 'success' : ''"
+          ></ion-icon>
+          <ion-button
+            slot="end"
+            fill="clear"
+            (click)="autorizarNotificaciones(vm)"
+          >
+            Autorizar
+          </ion-button>
+          <!-- <ion-button
+            *ngIf="vm.token"
+            slot="end"
+            fill="clear"
+            color="warning"
+            (click)="cancelarNotificaciones(vm)"
+          >
+            Cancelar
+          </ion-button> -->
+        </ion-item>
+        <ion-item-options>
+          <ion-item-option
+            [disabled]="!vm.token"
+            *ngIf="vm$ | async as vm"
+            (click)="testTokenMessage(vm.token)"
+          >
+            <ion-label>Mensaje de preuba</ion-label>
+            <ion-icon name="mail" slot="bottom"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ng-container>
+    <ion-item routerLink="preferences">
+      <ion-label> Preferencias </ion-label>
+      <ion-icon name="cog" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>Versión : {{appVersion}}</ion-label>
+      <ion-icon name="code-working" slot="start"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

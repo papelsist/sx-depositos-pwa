@@ -1,0 +1,25 @@
+{
+  "projects": {
+    "depositos": "papx-ws-dev",
+    "default": "papx-ws-dev",
+    "staging": "papx-ws-prod",
+    "certificacion": "papx-ws-dev",
+    "prod": "papx-ws-prod"
+  },
+  "targets": {
+    "papx-ws-dev": {
+      "hosting": {
+        "app": [
+          "papel-depositos"
+        ]
+      }
+    },
+    "papx-ws-prod": {
+      "hosting": {
+        "app": [
+          "papws-depositos"
+        ]
+      }
+    }
+  }
+}
